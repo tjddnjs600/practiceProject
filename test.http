@@ -1,3 +1,17 @@
-GET http://localhost:8080/test/testUser
+GET http://localhost:8080/test/selectUser/testUser1/1111
 Accept: application/json
+
+###
+
+
+POST http://localhost:8080/test/insertUser
+Accept: application/json
+Content-Type: application/json
+
+{
+  "user_id" : "test_112",
+  "user_pwd" : "pw1234",
+  "user_class_cd" : "F"
+}
+
 ###

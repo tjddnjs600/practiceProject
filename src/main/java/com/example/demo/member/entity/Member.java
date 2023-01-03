@@ -2,6 +2,7 @@ package com.example.demo.member.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -9,11 +10,9 @@ import javax.persistence.*;
 @Table(name = "member")
 @AllArgsConstructor
 @Builder
-public class Memeber {
+@Data
+public class Member{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_no;
-
     private String user_id;
 
     private String user_pwd;
@@ -24,5 +23,5 @@ public class Memeber {
 
     private String update_dt;
 
-    public Memeber() {}
+    public Member() {}
 }
