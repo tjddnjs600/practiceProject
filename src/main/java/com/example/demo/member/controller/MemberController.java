@@ -1,12 +1,11 @@
 package com.example.demo.member.controller;
 
-import com.example.demo.member.entity.Member;
+import com.example.demo.member.entity.MemberEntity;
 import com.example.demo.member.service.MemberService;
 import com.example.demo.member.vo.MemberVo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,14 +15,14 @@ import java.util.Map;
 @RestController
 @Slf4j
 @AllArgsConstructor
-@RequestMapping("/test")
+@RequestMapping("/user")
 public class MemberController {
 
     private MemberService memberService;
 
     @GetMapping(value = "/selectUserList")
-    public List<Member> selecList (){
-        List<Member> list = memberService.selecList();
+    public List<MemberEntity> selecList (){
+        List<MemberEntity> list = memberService.selecList();
         return list;
     }
 

@@ -1,7 +1,6 @@
 package com.example.demo.member.service.impl;
 
-import com.example.demo.member.entity.Member;
-import com.example.demo.member.entity.impl.MemberImpl;
+import com.example.demo.member.entity.MemberEntity;
 import com.example.demo.member.repository.MemberRepository;
 import com.example.demo.member.service.MemberService;
 import com.example.demo.member.vo.MemberVo;
@@ -27,13 +26,13 @@ public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
 
     @Override
-    public List<Member> selecList() {
+    public List<MemberEntity> selecList() {
         return memberRepository.findAll();
     }
 
     @Override
     public MemberVo selectUser(MemberVo memberVo) throws InvocationTargetException, IllegalAccessException {
-        Optional<Member> memer = memberRepository.findAll().stream()
+        Optional<MemberEntity> memer = memberRepository.findAll().stream()
                 .filter(id -> (id.getUser_id().equals(memberVo.getUser_id())
                                 && id.getUser_pwd().equals(memberVo.getUser_pwd()))).findFirst();
 
@@ -51,9 +50,9 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(rollbackFor = Exception.class)
     public Map<String, String> insertUser(MemberVo memberVo) throws InvocationTargetException, IllegalAccessException {
         Map<String, String> resMsp = new HashMap<>();
-        Member member = new Member();
+        MemberEntity memberEntity = new MemberEntity();
 
-        Optional<Member> checkEnt = memberRepository.findAll()
+        Optional<MemberEntity> checkEnt = memberRepository.findAll()
                 .stream().filter(ck -> ck.getUser_id().equals(memberVo.getUser_id())).findFirst();
 
         if(checkEnt.isPresent()){
@@ -62,11 +61,11 @@ public class MemberServiceImpl implements MemberService {
             return resMsp;
         }
 
-        BeanUtils.copyProperties(member, memberVo);
+        BeanUtils.copyProperties(memberEntity, memberVo);
 
-        Member resMember = memberRepository.save(member);
+        MemberEntity resMemberEntity = memberRepository.save(memberEntity);
 
-        if(ObjectUtils.isNotEmpty(resMember)){
+        if(ObjectUtils.isNotEmpty(resMemberEntity)){
             resMsp.put("resCd","200");
             resMsp.put("resMsg","저장성공");
         }

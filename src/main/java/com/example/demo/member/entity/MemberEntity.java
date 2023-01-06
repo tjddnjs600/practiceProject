@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Data
-public class Member{
+public class MemberEntity {
     @Id
     private String user_id;
 
@@ -23,5 +23,5 @@ public class Member{
 
     private String update_dt;
 
-    public Member() {}
+    public MemberEntity() {}
 }
