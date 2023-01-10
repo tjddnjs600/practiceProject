@@ -5,10 +5,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.concurrent.*;
 
+@EnableAsync
 @EnableScheduling
 @SpringBootApplication
 public class DemoApplication {
@@ -17,7 +19,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @Autowired
+    /*@Autowired
     TestClass testClass;
 
     @Bean
@@ -28,12 +30,11 @@ public class DemoApplication {
             BlockingQueue<Runnable> blockingDeque = new ArrayBlockingQueue<>(5);
             ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 10, 5, TimeUnit.MILLISECONDS, blockingDeque);
 
-
             for (int i = 0; i < 15; i++) {
                 threadPoolExecutor.execute(runnable);
                 System.out.println("mainThread "+i);
             }
         };
-    }
+    }*/
 
 }
