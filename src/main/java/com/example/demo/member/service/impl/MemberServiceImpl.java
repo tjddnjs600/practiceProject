@@ -1,5 +1,6 @@
 package com.example.demo.member.service.impl;
 
+import com.example.demo.common.threadPool.ThreadPoolConfig;
 import com.example.demo.member.entity.MemberEntity;
 import com.example.demo.member.repository.MemberRepository;
 import com.example.demo.member.service.MemberService;
@@ -8,14 +9,13 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 @Service
@@ -25,9 +25,22 @@ public class MemberServiceImpl implements MemberService {
 
     private MemberRepository memberRepository;
 
+    @Autowired
+    private ThreadPoolConfig threadPoolConfig;
+
     @Override
     public List<MemberEntity> selecList() {
-        return memberRepository.findAll();
+
+        List<MemberEntity> list = this.memberRepository.findAll();
+
+        Runnable r = () -> {
+            this.memberRepository.save(MemberEntity.builder().user_id("ThreadUser").user_class_cd("F").user_pwd("1234").build());
+            log.debug("userThread  : "+Thread.currentThread().getName());
+        };
+
+        this.threadPoolConfig.executor().execute(r);
+
+        return list;
     }
 
     @Override
