@@ -33,7 +33,7 @@ public class OrderScheduler {
     private OrderRsltRepository orderRsltRepository;
 
 //    @Scheduled(cron = "0 10 * * * *")
-    @Scheduled(fixedDelay = 600000)
+    /*@Scheduled(fixedDelay = 600000)
     @Transactional(rollbackFor = Exception.class)
     public void ordstatScheduler(){
         List<OrderEntity> ordList = orderRepository.findAll()
@@ -76,7 +76,7 @@ public class OrderScheduler {
 
         this.orderRsltRepository.saveAll(list);
         log.debug("스케줄러 save result  200");
-    }
+    }*/
 
     /*@Scheduled(fixedDelay = 3000)
     public void testScheduler(){
