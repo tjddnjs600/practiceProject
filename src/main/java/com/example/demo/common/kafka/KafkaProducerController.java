@@ -18,6 +18,6 @@ public class KafkaProducerController {
     @PostMapping("/sendMsg")
     public void sendKafkMsg(@RequestBody String msg){
         log.debug("메세지  :  "+msg);
-        this.kafkaProducerService.produce(msg);
+        this.kafkaProducerService.memberProduce(msg);
     }
 }
