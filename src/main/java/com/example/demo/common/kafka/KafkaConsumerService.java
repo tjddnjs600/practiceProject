@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class KafkaConsumerService {
-
-    @KafkaListener(topics = "springTest", groupId = "springKafkaTest")
+                                                                        /*tlqkf 그지같은 설정*/
+    @KafkaListener(topics = "springTest", groupId = "springKafkaTest", containerFactory = "memberChangeListener")
     public void memberConsume(MemberVo member){
         log.info("kafka 테스트  :  "+ member);
     }
